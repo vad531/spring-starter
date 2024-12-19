@@ -1,9 +1,11 @@
 package org.example.database.repository;
 
+import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
@@ -15,16 +17,17 @@ import java.util.Map;
 
 @Repository
 @ToString
+@Slf4j
 public class UserRepository {
-    @Value("${db.username}")
+    @Value("${spring.datasource.username}")
     private String userName;
-    @Value("${db.password}")
+    @Value("${spring.datasource.password}")
     private String password;
-    @Value("${db.url}")
+    @Value("${spring.datasource.url}")
     private String url;
-    @Value("${db.driver}")
+    @Value("${spring.datasource.driver-class-name}")
     private String driver;
-    @Value("${db.poll.size}")
+    @Value("${spring.datasource.poll.size}")
     private int poolSize;
     private List<Object> args;
     private Map<String, Object> properties;
@@ -48,5 +51,15 @@ public class UserRepository {
         } catch (SQLException e) {
             System.err.println("Ошибка при подключении к БД: " + e.getMessage());
         }
+    }
+
+    public void addUser(String name, String email) {
+        log.info("Добавление пользователя в базу...");
+        log.info("Имя: {}, Email: {}", name, email);
+        log.info("Заглушка: пользователь успешно добавлен (фиктивно).");
+    }
+    @PostConstruct
+    private void init() {
+        log.info("Init connection pool");
     }
 }

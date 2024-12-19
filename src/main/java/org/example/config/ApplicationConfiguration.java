@@ -2,10 +2,9 @@ package org.example.config;
 
 import org.springframework.context.annotation.*;
 
-@ImportResource("classpath:application.xml")
+
 @Configuration
 @ComponentScan("org.example")
-@PropertySource("classpath:application.properties")
 public class ApplicationConfiguration {
     @Bean
     @Profile("prod")

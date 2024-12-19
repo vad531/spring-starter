@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: Shustrik@531
+    driver-class-name: org.postgresql.Driver
+    poll:
+      size: 10
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+
+logging:
+  level:
+    root: info
+  file:
+    name: org.example
+    path: /
+
+company:
+  name: TechCorp
+  size: 500
