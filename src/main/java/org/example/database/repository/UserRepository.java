@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,15 +13,18 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
+@Repository
 @ToString
 public class UserRepository {
+    @Value("${db.username}")
     private String userName;
+    @Value("${db.password}")
     private String password;
+    @Value("${db.url}")
     private String url;
+    @Value("${db.driver}")
     private String driver;
+    @Value("${db.poll.size}")
     private int poolSize;
     private List<Object> args;
     private Map<String, Object> properties;

@@ -6,43 +6,5 @@
 http://www.springframework.org/schema/context
 http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
- <context:property-placeholder location="classpath:application.properties"/>
-
-<bean id="repo1" class="org.example.database.repository.UserRepository">
-    <constructor-arg name="userName" value="${db.username}"/>
-    <constructor-arg name="password" value="${db.password}"/>
-    <constructor-arg name="url" value="${db.url}"/>
-    <constructor-arg name="driver" value="${db.driver}"/>
-    <constructor-arg name="poolSize" value="${db.poll.size}"/>
-    <constructor-arg name="args">
-            <list>
-                <value>1</value>
-                <value>2</value>
-                <value>3</value>
-            </list>
-    </constructor-arg>
-    <constructor-arg name="properties">
-            <map>
-                <entry key="user" value="Vadim"/>
-                <entry key="adress" value="Kurganinsk"/>
-            </map>
-    </constructor-arg>
-    </bean>
-
-    <bean name="userDto" class="org.example.dto.UserDto"/>
-
-    <bean name="userMapper" class="org.example.mapper.UserMapper">
-        <constructor-arg ref="userDto"/>
-    </bean>
-
-    <bean name="userService" class="org.example.service.UserService">
-        <constructor-arg name="userRepository" ref="repo1"/>
-        <constructor-arg name="userMapper" ref="userMapper"/>
-    </bean>
-
-    <bean id="companyService" class="org.example.service.CompanyService">
-        <constructor-arg name="companyName" value="TechCorp"/>
-        <constructor-arg name="companySize" value="500"/>
-    </bean>
 
 </beans>

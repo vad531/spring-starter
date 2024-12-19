@@ -1,21 +1,20 @@
 package org.example;
 
+import org.example.config.ApplicationConfiguration;
 import org.example.database.repository.UserRepository;
 import org.example.service.CompanyService;
-import org.example.service.UserService;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class SpringRunner {
     public static void main(String[] args) {
+        try (var context = new AnnotationConfigApplicationContext(ApplicationConfiguration.class)) {
+            // Получаем Bean UserRepository
+            var userRepository = context.getBean(UserRepository.class);
+            userRepository.findUserById(1);
 
-        var context = new ClassPathXmlApplicationContext("application.xml");
-        var userRepository = context.getBean("repo1", UserRepository.class);
-        var companyService = context.getBean("companyService", CompanyService.class);
-
-//        var userService = (UserService) context.getBean("userService");
-//        System.out.println(userRepository);
-
-        userRepository.findUserById(1);
-        companyService.findCompanyById(1001);
+            // Получаем Bean CompanyService
+            var companyService = context.getBean(CompanyService.class);
+            companyService.findCompanyById(1001);
+        }
     }
 }
