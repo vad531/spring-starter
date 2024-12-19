@@ -14,7 +14,7 @@ public class SpringRunner {
 
             // Получаем Bean CompanyService
             var companyService = context.getBean(CompanyService.class);
-            companyService.findCompanyById(1001);
+            companyService.findById(1);
         }
     }
 }
