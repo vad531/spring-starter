@@ -1,0 +1,19 @@
+db:
+username: postgres
+password: Shustrik@531
+poll:size: 12
+driver: org.postgresql.Driver
+url: jdbc:postgresql://localhost:5432/postgres
+hosts: localhost, 127.0.0.1
+
+company:
+  name: TechCorp
+  size: 500
+
+
+logging:
+  level:
+    root: info
+  file:
+    name: org.example
+    path: /
