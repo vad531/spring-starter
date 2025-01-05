@@ -1,15 +1,21 @@
 package org.example.database.repository;
 
 import org.example.database.entity.Company;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 
-@Repository
-public class CompanyRepository {
+public interface CompanyRepository extends JpaRepository<Company, Integer> {
 
-    public Optional<Company> findById(Integer id) {
-        System.out.println("CompanyRepository findById method");
-        return Optional.of(new Company(id));
-    }
+    @Modifying(clearAutomatically = true)
+    @Transactional
+    @Query("UPDATE Company c SET c.name = :name WHERE c.id = :id")
+    int updateCompanyNameById(Integer id, String name);
+
+    @Modifying
+    @Transactional
+
+    void deleteAllByNameStartingWith(String prefix);
 }
