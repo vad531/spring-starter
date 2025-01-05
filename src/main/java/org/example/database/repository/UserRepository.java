@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
 
     @Query(value = "select u.firstname, u.lastname, u.birth_date birthDate from users u " +
             "where u.company_id = :companyId",
@@ -39,4 +40,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     int updateRole(Role role, Long... ids);
 
     List<User> findByRoleAndBirthDateBetween(Role role, LocalDate startDate, LocalDate endDate);
+
+    @Query("SELECT u FROM User u")
+    List<User> findFirst4Users(Pageable pageable);
+
+    List<User> findAll(Sort sort);
 }
